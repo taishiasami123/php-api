@@ -14,7 +14,7 @@ const signUp = () => {
       password_confirmation: password_confirmation
     }
   };
-  fetch("https://teachapi.herokuapp.com/sign_up", {
+  fetch("http://localhost:8888/php-api/signup.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
