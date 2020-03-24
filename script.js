@@ -21,15 +21,15 @@ const signUp = () => {
     },
     body: JSON.stringify(data),
   })
-  .then(response => {
-    const json = response.json();
-    return json;
-  })
-  .then(json => {
-    console.log(json);
-    localStorage.setItem("id", json.id);
-    localStorage.setItem("token", json.token)
-  });
+    .then(response => {
+      const json = response.json();
+      return json;
+    })
+    .then(json => {
+      console.log(json);
+      localStorage.setItem("id", json.id);
+      localStorage.setItem("token", json.token)
+    });
 };
 
 // ユーザーログイン
@@ -51,15 +51,15 @@ const signIn = () => {
     },
     body: JSON.stringify(data),
   })
-  .then(response => {
-    const json = response.json();
-    return json;
-  })
-  .then(json => {
-    console.log(json);
-    localStorage.setItem("id", json.id)
-    localStorage.setItem("token", json.token)
-  });
+    .then(response => {
+      const json = response.json();
+      return json;
+    })
+    .then(json => {
+      console.log(json);
+      localStorage.setItem("id", json.id)
+      localStorage.setItem("token", json.token)
+    });
 };
 
 // ユーザー一覧
@@ -76,20 +76,20 @@ const userList = () => {
       "Authorization": "Bearer " + token
     }
   })
-  .then(response => {
-    const json = response.json();
-    return json;
-  })
-  .then(json => {
-    console.log(json);
-    let br = "<br>";
-    for (let i = 0; i < json.length; i++) {
-      const obj = json[i];
-      const objstr = JSON.stringify(obj.name);
-      br += objstr + "<br>";
-    }
-    userList.innerHTML = br;
-  });
+    .then(response => {
+      const json = response.json();
+      return json;
+    })
+    .then(json => {
+      console.log(json);
+      let br = "<br>";
+      for (let i = 0; i < json.length; i++) {
+        const obj = json[i];
+        const objstr = JSON.stringify(obj.name);
+        br += objstr + "<br>";
+      }
+      userList.innerHTML = br;
+    });
 };
 
 // 投稿一覧
@@ -106,20 +106,20 @@ const postList = () => {
       "Authorization": "Bearer " + token
     }
   })
-  .then(response => {
-    const json = response.json();
-    return json;
-  })
-  .then(json => {
-    console.log(json);
-    let br = "<br>";
-    for (let i = 0; i < json.length; i++) {
-      const obj = json[i];
-      const objstr = JSON.stringify(obj.text);
-      br += objstr + "<br>";
-    }
-    postList.innerHTML = br;
-  });
+    .then(response => {
+      const json = response.json();
+      return json;
+    })
+    .then(json => {
+      console.log(json);
+      let br = "<br>";
+      for (let i = 0; i < json.length; i++) {
+        const obj = json[i];
+        const objstr = JSON.stringify(obj.text);
+        br += objstr + "<br>";
+      }
+      postList.innerHTML = br;
+    });
 };
 
 // ユーザー編集
@@ -142,13 +142,13 @@ const editUser = () => {
     },
     body: JSON.stringify(data),
   })
-  .then(response => {
-    const json = response.json();
-    return json;
-  })
-  .then(json => {
-    console.log(json);
-  });
+    .then(response => {
+      const json = response.json();
+      return json;
+    })
+    .then(json => {
+      console.log(json);
+    });
 };
 
 // ユーザー削除
@@ -162,13 +162,13 @@ const deleteUser = () => {
       "Authorization": "Bearer " + token
     },
   })
-  .then(response => {
-    const json = response.json();
-    return json;
-  })
-  .then(json => {
-    console.log(json);
-  });
+    .then(response => {
+      const json = response.json();
+      return json;
+    })
+    .then(json => {
+      console.log(json);
+    });
 };
 
 // タイムライン
@@ -186,20 +186,20 @@ const timeline = () => {
       "Authorization": "Bearer " + token
     }
   })
-  .then(response => {
-    const json = response.json();
-    return json;
-  })
-  .then(json => {
-    console.log(json);
-    let br = "<br>";
-    for (let i = 0; i < json.length; i++) {
-      const obj = json[i];
-      const objstr = JSON.stringify(obj.text);
-      br += objstr + "<br>";
-    }
-    tlList.innerHTML = br;
-  });
+    .then(response => {
+      const json = response.json();
+      return json;
+    })
+    .then(json => {
+      console.log(json);
+      let br = "<br>";
+      for (let i = 0; i < json.length; i++) {
+        const obj = json[i];
+        const objstr = JSON.stringify(obj.text);
+        br += objstr + "<br>";
+      }
+      tlList.innerHTML = br;
+    });
 };
 
 // 投稿作成
@@ -219,13 +219,13 @@ const submitPost = () => {
     },
     body: JSON.stringify(data),
   })
-  .then(response => {
-    const json = response.json();
-    return json;
-  })
-  .then(json => {
-    console.log(json);
-  });
+    .then(response => {
+      const json = response.json();
+      return json;
+    })
+    .then(json => {
+      console.log(json);
+    });
 }
 
 // 投稿編集
@@ -246,13 +246,13 @@ const editPost = () => {
     },
     body: JSON.stringify(data),
   })
-  .then(response => {
-    const json = response.json();
-    return json;
-  })
-  .then(json => {
-    console.log(json);
-  });
+    .then(response => {
+      const json = response.json();
+      return json;
+    })
+    .then(json => {
+      console.log(json);
+    });
 }
 
 // 投稿削除
@@ -266,11 +266,11 @@ const deletePost = () => {
       "Authorization": "Bearer " + token
     },
   })
-  .then(response => {
-    const json = response.json();
-    return json;
-  })
-  .then(json => {
-    console.log(json);
-  });
+    .then(response => {
+      const json = response.json();
+      return json;
+    })
+    .then(json => {
+      console.log(json);
+    });
 }
