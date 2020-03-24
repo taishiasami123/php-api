@@ -78,6 +78,8 @@
     sendResponse($e);
   }
   $selectResult = $select->fetchAll(PDO::FETCH_ASSOC);
+  // 配列からpassword要素を削除
+  unset($selectResult[0]['password']);
   sendResponse($selectResult[0]);
 
 ?>
