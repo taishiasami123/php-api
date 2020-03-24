@@ -10,12 +10,12 @@
 
   // jsonを取得
   $json = file_get_contents("php://input");
-  $contents = json_decode($json, true)['sign_up_user_params'];
-  $name = $contents['name'];
-  $bio = $contents['bio'];
-  $email = $contents['email'];
-  $pwd = $contents['password'];
-  $pwdCfm = $contents['password_confirmation'];
+  $params = json_decode($json, true)['sign_up_user_params'];
+  $name = $params['name'];
+  $bio = $params['bio'];
+  $email = $params['email'];
+  $pwd = $params['password'];
+  $pwdCfm = $params['password_confirmation'];
 
   // token生成
   $salt = "phpapi";
