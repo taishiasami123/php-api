@@ -43,7 +43,11 @@
   // email重複チェック
   $emailCheck = $db->prepare("SELECT * FROM users WHERE email = :email");
   $emailCheck->bindValue(':email', $email, PDO::PARAM_STR);
-  $emailCheck->execute();
+  try {
+    $emailCheck->execute();
+  } catch (Exception $e) {
+    sendResponse($e);
+  }
   $fetchAllResult = $emailCheck->fetchAll(PDO::FETCH_ASSOC);
   if (count($fetchAllResult) >= 1) {
     $errorMessage = "そのemailは登録されている";
@@ -57,12 +61,20 @@
   $stmt->bindValue(':email', $email, PDO::PARAM_STR);
   $stmt->bindValue(':pwd', $pwd, PDO::PARAM_STR);
   $stmt->bindValue(':token', $token, PDO::PARAM_STR);
-  $stmt->execute();
+  try {
+    $stmt->execute();
+  } catch (Exception $e) {
+    sendResponse($e);
+  }
 
   // dbからemailが一致するレコードを取得して返却
   $select = $db->prepare('SELECT * FROM users WHERE email = :email');
   $select->bindValue(':email', $email, PDO::PARAM_STR);
-  $select->execute();
+  try {
+    $select->execute();
+  } catch (Exception $e) {
+    sendResponse($e);
+  }
   $selectResult = $select->fetchAll(PDO::FETCH_ASSOC);
   sendResponse($selectResult[0]);
 
