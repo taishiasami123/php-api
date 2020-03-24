@@ -8,21 +8,39 @@
   require('dbconnect.php');
   $json = file_get_contents("php://input");
   $contents = json_decode($json, true)['sign_up_user_params'];
-
   $name = $contents['name'];
   $bio = $contents['bio'];
   $email = $contents['email'];
-  $password = $contents['password'];
+  $pwd = $contents['password'];
   if ($token == "") {
     $token = 0;
   } else {
     $token = intval($token);
   }
-  // $statement = $db->prepare('INSERT INTO users SET name=?, bio=?, email=?, password=?, token=?, created_at=NOW()');
-  // $statement->execute(array($name, $bio, $email, $password, $token));
-  $select = $db->query('SELECT * FROM users WHERE email="test"');
-  $selectResult = $select->fetch();
-  sendResponse($selectResult);
 
-  file_put_contents("log1.txt", var_export($selectResult, true));
+  $emailCheck = $db->prepare("SELECT * FROM users WHERE email = :email");
+  $emailCheck->bindValue(':email', $email, PDO::PARAM_STR);
+  $emailCheck->execute();
+  $fetchAllResult = $emailCheck->fetchAll(PDO::FETCH_ASSOC);
+
+  if (count($fetchAllResult) >= 1) {
+    $errorMessage = "そのemailは登録されている";
+    sendResponse($errorMessage);
+  } else {
+
+  $stmt = $db->prepare('INSERT INTO users SET name = :name, bio = :bio, email = :email, password = :pwd, token = :token, created_at = NOW()');
+  $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+  $stmt->bindValue(':bio', $bio, PDO::PARAM_STR);
+  $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+  $stmt->bindValue(':pwd', $pwd, PDO::PARAM_STR);
+  $stmt->bindValue(':token', $token, PDO::PARAM_STR);
+  $stmt->execute();
+
+  $select = $db->prepare('SELECT * FROM users WHERE email = :email');
+  $select->bindValue(':email', $email, PDO::PARAM_STR);
+  $select->execute();
+  $selectResult = $select->fetchAll(PDO::FETCH_ASSOC);
+  sendResponse($selectResult[0]);
+
+  }
 ?>
