@@ -17,12 +17,10 @@
   $pwd = $contents['password'];
   $pwdCfm = $contents['password_confirmation'];
 
-  // 暫定処置：tokenを0に設定
-  if ($token == "") {
-    $token = 0;
-  } else {
-    $token = intval($token);
-  }
+  // token生成
+  $salt = "phpapi";
+  $seed = $salt.$email;
+  $token = hash('sha256', $seed);
 
   // blankチェックとpwd一致チェック
   if ($name == "") {
