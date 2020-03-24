@@ -59,6 +59,8 @@
   $stmt->bindValue(':name', $name, PDO::PARAM_STR);
   $stmt->bindValue(':bio', $bio, PDO::PARAM_STR);
   $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+  // pwdハッシュ化
+  $pwd = hash('sha256', $pwd);
   $stmt->bindValue(':pwd', $pwd, PDO::PARAM_STR);
   $stmt->bindValue(':token', $token, PDO::PARAM_STR);
   try {
