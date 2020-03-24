@@ -22,7 +22,7 @@
   $seed = $salt.$email;
   $token = hash('sha256', $seed);
 
-  // blankチェックとpwd一致チェック
+  // blankチェック
   if ($name == "") {
     $errorMessage = "Validation failed: Name can't be blank";
     sendResponse($errorMessage);
@@ -35,6 +35,8 @@
   } elseif ($pwd == "") {
     $errorMessage = "Validation failed: Password can't be blank";
     sendResponse($errorMessage);
+
+  // pwd一致チェック
   } elseif ($pwd != $pwdCfm) {
     $errorMessage = "Validation failed: Password confirmation doesn't match password";
     sendResponse($errorMessage);
