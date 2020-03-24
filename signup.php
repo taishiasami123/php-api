@@ -61,8 +61,7 @@
   $stmt->bindValue(':name', $name, PDO::PARAM_STR);
   $stmt->bindValue(':bio', $bio, PDO::PARAM_STR);
   $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-  // pwdハッシュ化
-  $pwd = hash('sha256', $pwd);
+  $pwd = hash('sha256', $pwd); // pwdハッシュ化
   $stmt->bindValue(':pwd', $pwd, PDO::PARAM_STR);
   $stmt->bindValue(':token', $token, PDO::PARAM_STR);
   try {
@@ -80,8 +79,7 @@
     sendResponse($e);
   }
   $selectResult = $select->fetchAll(PDO::FETCH_ASSOC);
-  // 配列からpassword要素を削除
-  unset($selectResult[0]['password']);
+  unset($selectResult[0]['password']); // 配列からpassword要素を削除
   sendResponse($selectResult[0]);
 
 ?>
