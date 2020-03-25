@@ -43,4 +43,10 @@
   $slctEmail = $slctUsrFtchAllRslt[0]['email'];
   $slctPwd = $slctUsrFtchAllRslt[0]['password'];
 
+  // パスワード一致チェック
+  if ($pwd != $pwdCfm || $pwd != $slctPwd) {
+    $errMsg = "そのemailもしくはpasswordが違います";
+    sendResponse($errMsg);
+  }
+
 ?>
