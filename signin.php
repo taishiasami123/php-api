@@ -4,4 +4,8 @@
     echo json_encode($obj);
     die();
   }
+
+  // dbに繋ぐ
+  require('dbconnect.php');
+
 ?>
