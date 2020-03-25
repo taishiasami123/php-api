@@ -78,8 +78,8 @@
   } catch (Exception $e) {
     sendResponse($e);
   }
-  $rtrnFetchAllResult = $rtrnStmt->fetchAll(PDO::FETCH_ASSOC);
-  unset($rtrnFetchAllResult[0]['password']); // 配列からpassword要素を削除
-  sendResponse($rtrnFetchAllResult[0]);
+  $rtrnFtchAllRslt = $rtrnStmt->fetchAll(PDO::FETCH_ASSOC);
+  unset($rtrnFtchAllRslt[0]['password']); // 配列からpassword要素を削除
+  sendResponse($rtrnFtchAllRslt[0]);
 
 ?>
