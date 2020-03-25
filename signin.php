@@ -17,4 +17,10 @@
   $pwdCfm = $params['password_confirmation'];
   $pwdCfm = hash('sha256', $pwdCfm); //ハッシュ化
 
+  // email欄が空だったらエラー吐く
+  if ($email == "") {
+    $errMsg = "そのemailもしくはpasswordが違います";
+    sendResponse($errMsg);
+  }
+
 ?>
