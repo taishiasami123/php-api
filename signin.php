@@ -39,4 +39,8 @@
     sendResponse($errMsg);
   }
 
+  // 一致するものがあったら値取り出す
+  $slctEmail = $slctUsrFtchAllRslt[0]['email'];
+  $slctPwd = $slctUsrFtchAllRslt[0]['password'];
+
 ?>
