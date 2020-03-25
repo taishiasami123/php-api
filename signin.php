@@ -23,4 +23,14 @@
     sendResponse($errMsg);
   }
 
+  // emailに入力された値と一致する行をdbから拾ってくる
+  $slctUsrStmt = $db->prepare('SELECT email, password FROM users WHERE email = :email');
+  $slctUsrStmt->bindValue(':email', $email, PDO::PARAM_STR);
+  try {
+    $slctUsrStmt->execute();
+  } catch (Exception $e) {
+    sendResponse($e);
+  }
+  $slctUsrFtchAllRslt = $slctUsrStmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
