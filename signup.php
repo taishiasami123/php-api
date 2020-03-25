@@ -24,22 +24,22 @@
 
   // blankチェック
   if ($name == "") {
-    $errorMessage = "Validation failed: Name can't be blank";
-    sendResponse($errorMessage);
+    $errMsg = "Validation failed: Name can't be blank";
+    sendResponse($errMsg);
   } elseif ($bio == "") {
-    $errorMessage = "Validation failed: Bio can't be blank";
-    sendResponse($errorMessage);
+    $errMsg = "Validation failed: Bio can't be blank";
+    sendResponse($errMsg);
   } elseif ($email == "") {
-    $errorMessage = "Validation failed: Email can't be blank";
-    sendResponse($errorMessage);
+    $errMsg = "Validation failed: Email can't be blank";
+    sendResponse($errMsg);
   } elseif ($pwd == "") {
-    $errorMessage = "Validation failed: Password can't be blank";
-    sendResponse($errorMessage);
+    $errMsg = "Validation failed: Password can't be blank";
+    sendResponse($errMsg);
 
   // pwd一致チェック
   } elseif ($pwd != $pwdCfm) {
-    $errorMessage = "Validation failed: Password confirmation doesn't match password";
-    sendResponse($errorMessage);
+    $errMsg = "Validation failed: Password confirmation doesn't match password";
+    sendResponse($errMsg);
   }
 
   // email重複チェック
@@ -52,8 +52,8 @@
   }
   $fetchAllResult = $emailCheck->fetchAll(PDO::FETCH_ASSOC);
   if (count($fetchAllResult) >= 1) {
-    $errorMessage = "そのemailは登録されている";
-    sendResponse($errorMessage);
+    $errMsg = "そのemailは登録されている";
+    sendResponse($errMsg);
   }
 
   // db登録処理
