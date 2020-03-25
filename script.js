@@ -44,7 +44,7 @@ const signIn = () => {
       password_confirmation: passwordConfirmation
     }
   };
-  fetch("https://teachapi.herokuapp.com/sign_in", {
+  fetch("http://localhost:8888/php-api/signin.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
