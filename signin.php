@@ -49,4 +49,15 @@
     sendResponse($errMsg);
   }
 
+  // dbからemailが一致するレコードを取得して返却
+  $rtrnStmt = $db->prepare('SELECT * FROM users WHERE email = :email');
+  $rtrnStmt->bindValue(':email', $email, PDO::PARAM_STR);
+  try {
+    $rtrnStmt->execute();
+  } catch (Exception $e) {
+    sendResponse($e);
+  }
+  $rtrnFtchAllRslt = $rtrnStmt->fetchAll(PDO::FETCH_ASSOC);
+  unset($rtrnFtchAllRslt[0]['password']); // 配列からpassword要素を削除
+  sendResponse($rtrnFtchAllRslt[0]);
 ?>
