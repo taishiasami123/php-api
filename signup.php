@@ -43,43 +43,43 @@
   }
 
   // email重複チェック
-  $emailCheck = $db->prepare("SELECT * FROM users WHERE email = :email");
-  $emailCheck->bindValue(':email', $email, PDO::PARAM_STR);
+  $emailChkStmt = $db->prepare("SELECT * FROM users WHERE email = :email");
+  $emailChkStmt->bindValue(':email', $email, PDO::PARAM_STR);
   try {
-    $emailCheck->execute();
+    $emailChkStmt->execute();
   } catch (Exception $e) {
     sendResponse($e);
   }
-  $fetchAllResult = $emailCheck->fetchAll(PDO::FETCH_ASSOC);
-  if (count($fetchAllResult) >= 1) {
+  $emailChkFetchAllResult = $emailChkStmt->fetchAll(PDO::FETCH_ASSOC);
+  if (count($emailChkFetchAllResult) >= 1) {
     $errMsg = "そのemailは登録されている";
     sendResponse($errMsg);
   }
 
   // db登録処理
-  $stmt = $db->prepare('INSERT INTO users SET name = :name, bio = :bio, email = :email, password = :pwd, token = :token, created_at = NOW()');
-  $stmt->bindValue(':name', $name, PDO::PARAM_STR);
-  $stmt->bindValue(':bio', $bio, PDO::PARAM_STR);
-  $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+  $RgstStmt = $db->prepare('INSERT INTO users SET name = :name, bio = :bio, email = :email, password = :pwd, token = :token, created_at = NOW()');
+  $RgstStmt->bindValue(':name', $name, PDO::PARAM_STR);
+  $RgstStmt->bindValue(':bio', $bio, PDO::PARAM_STR);
+  $RgstStmt->bindValue(':email', $email, PDO::PARAM_STR);
   $pwd = hash('sha256', $pwd); // pwdハッシュ化
-  $stmt->bindValue(':pwd', $pwd, PDO::PARAM_STR);
-  $stmt->bindValue(':token', $token, PDO::PARAM_STR);
+  $RgstStmt->bindValue(':pwd', $pwd, PDO::PARAM_STR);
+  $RgstStmt->bindValue(':token', $token, PDO::PARAM_STR);
   try {
-    $stmt->execute();
+    $RgstStmt->execute();
   } catch (Exception $e) {
     sendResponse($e);
   }
 
   // dbからemailが一致するレコードを取得して返却
-  $select = $db->prepare('SELECT * FROM users WHERE email = :email');
-  $select->bindValue(':email', $email, PDO::PARAM_STR);
+  $rtrnStmt = $db->prepare('SELECT * FROM users WHERE email = :email');
+  $rtrnStmt->bindValue(':email', $email, PDO::PARAM_STR);
   try {
-    $select->execute();
+    $rtrnStmt->execute();
   } catch (Exception $e) {
     sendResponse($e);
   }
-  $selectResult = $select->fetchAll(PDO::FETCH_ASSOC);
-  unset($selectResult[0]['password']); // 配列からpassword要素を削除
-  sendResponse($selectResult[0]);
+  $rtrnFetchAllResult = $rtrnStmt->fetchAll(PDO::FETCH_ASSOC);
+  unset($rtrnFetchAllResult[0]['password']); // 配列からpassword要素を削除
+  sendResponse($rtrnFetchAllResult[0]);
 
 ?>
