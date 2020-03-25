@@ -51,7 +51,7 @@
     sendResponse($e);
   }
   $emailChkFetchAllResult = $emailChkStmt->fetchAll(PDO::FETCH_ASSOC);
-  if (count($emailChkFetchAllResult) >= 1) {
+  if (count($emailChkFetchAllResult) > 0) {
     $errMsg = "そのemailは登録されている";
     sendResponse($errMsg);
   }
