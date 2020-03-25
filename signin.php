@@ -33,4 +33,10 @@
   }
   $slctUsrFtchAllRslt = $slctUsrStmt->fetchAll(PDO::FETCH_ASSOC);
 
+  // 一致するものがなかったらエラー吐く
+  if (count($slctUsrFtchAllRslt) == 0) {
+    $errMsg = "そのemailもしくはpasswordが違います";
+    sendResponse($errMsg);
+  }
+
 ?>
