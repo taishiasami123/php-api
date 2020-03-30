@@ -28,4 +28,10 @@
   $slctUsrStmtFtchAllRslt = $slctUsrStmt->fetchAll(PDO::FETCH_ASSOC);
   $slctdToken = $slctUsrStmtFtchAllRslt[0][token];
 
+  // tokenが見つからなかったらエラー吐く
+  if (count($slctdToken) == 0) {
+    $errMsg = "tokenがおかしい";
+    sendResponse($errMsg);
+  }
+
 ?>
