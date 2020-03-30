@@ -57,4 +57,8 @@
     $limit = 25;
   }
 
+  // 返す配列の開始位置，終了位置を変数に代入
+  $startPoint = $page * $limit - $limit;
+  $endPoint = $page * $limit - 1;
+
 ?>
