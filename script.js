@@ -99,7 +99,7 @@ const postList = () => {
   const postSearch = document.getElementById("postSearch").value;
   const postList = document.getElementById("postList");
   const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/posts?page=${postPageNumber}&limit=${postPageLimit}&query=${postSearch}`, {
+  fetch(`http://localhost:8888/php-api/postlist.php?page=${postPageNumber}&limit=${postPageLimit}&query=${postSearch}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
