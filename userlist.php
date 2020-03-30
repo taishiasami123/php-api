@@ -49,4 +49,12 @@
   }
   $rtrnFtchAllRslt = $rtrnStmt->fetchAll(PDO::FETCH_ASSOC);
 
+  // $page, $limitがブランクだった場合に値を代入
+  if ($page == "") {
+    $page = 1;
+  }
+  if ($limit == "") {
+    $limit = 25;
+  }
+
 ?>
