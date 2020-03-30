@@ -82,4 +82,10 @@
   $startPoint = $page * $limit - $limit;
   $endPoint = $page * $limit - 1;
 
+  // 結果の配列を受け取る変数を作って，そいつを返す
+  $echoRslt = [];
+  for ($i = $startPoint; $i <= $endPoint && $i < count($rtrnFtchAllPostRslt); $i++) {
+    $echoRslt[] = $rtrnFtchAllPostRslt[$i];
+  }
+  sendResponse($echoRslt);
 ?>
