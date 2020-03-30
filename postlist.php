@@ -17,4 +17,15 @@
   $limit = $_GET['limit'];
   $keyword = $_GET['query'];
 
+  // dbにtokenを探しに行く
+  $slctUsrStmt = $db->prepare('SELECT token FROM users WHERE token = :token');
+  $slctUsrStmt->bindValue(':token', $token, PDO::PARAM_STR);
+  try {
+    $slctUsrStmt->execute();
+  } catch (Exception $e) {
+    sendResponse($e);
+  }
+  $slctUsrStmtFtchAllRslt = $slctUsrStmt->fetchAll(PDO::FETCH_ASSOC);
+  $slctdToken = $slctUsrStmtFtchAllRslt[0][token];
+
 ?>
