@@ -69,7 +69,7 @@ const userList = () => {
   const userSearch = document.getElementById("userListSearch").value;
   const userList = document.getElementById("userList");
   const token = localStorage.getItem("token");
-  fetch(`https://teachapi.herokuapp.com/users?page=${userPageNumber}&limit=${userPageLimit}&query=${userSearch}`, {
+  fetch(`http://localhost:8888/php-api/userlist.php?page=${userPageNumber}&limit=${userPageLimit}&query=${userSearch}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
