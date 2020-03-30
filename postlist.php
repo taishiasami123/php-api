@@ -49,4 +49,25 @@
   }
   $rtrnFtchAllPostRslt = $rtrnPostStmt->fetchAll(PDO::FETCH_ASSOC);
 
+  // usersテーブル全体を一旦引っ張る
+  $rtrnUserStmt = $db->prepare('SELECT * FROM users');
+  $rtrnUserStmt->bindValue(':id', $slctdUserId, PDO::PARAM_STR);
+  try {
+    $rtrnUserStmt->execute();
+  } catch (Exception $e) {
+    sendResponse($e);
+  }
+  $rtrnFtchAllUserRslt = $rtrnUserStmt->fetchAll(PDO::FETCH_ASSOC);
+
+  // usersテーブルのidを検索する
+  foreach($rtrnFtchAllPostRslt as &$post){
+    foreach($rtrnFtchAllUserRslt as $user) {
+      if($user['id'] == $post['user_id']) {
+        unset($post['user_id'], $user['email'], $user['password'], $user['token']);
+        $post['user'] = $user;
+        break;
+      }
+    }
+  }
+
 ?>
