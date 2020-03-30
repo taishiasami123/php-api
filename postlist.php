@@ -5,4 +5,7 @@
     die();
   }
 
+  // dbに繋ぐ
+  require('dbconnect.php');
+
 ?>
