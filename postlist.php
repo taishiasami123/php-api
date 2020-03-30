@@ -34,4 +34,19 @@
     sendResponse($errMsg);
   }
 
+  // tokenが見つかったら投稿一覧引っ張る
+  if ($keyword == "") {
+    $rtrnPostStmt = $db->prepare('SELECT id, text, user_id, created_at, updated_at FROM posts');
+  } else {
+    $rtrnPostStmt = $db->prepare('SELECT id, text, user_id, created_at, updated_at FROM posts WHERE text LIKE :srchKwd');
+    $srchKwd = "%".$keyword."%";
+    $rtrnPostStmt->bindValue(':srchKwd', $srchKwd, PDO::PARAM_STR);
+  }
+  try {
+    $rtrnPostStmt->execute();
+  } catch (Exception $e) {
+    sendResponse($e);
+  }
+  $rtrnFtchAllPostRslt = $rtrnPostStmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
