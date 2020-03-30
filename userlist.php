@@ -34,4 +34,19 @@
     sendResponse($errMsg);
   }
 
+  // tokenが見つかったらユーザー一覧引っ張る
+  if ($keyword == "") {
+    $rtrnStmt = $db->prepare('SELECT id, name, created_at, updated_at FROM users');
+  } else {
+    $rtrnStmt = $db->prepare('SELECT id, name, created_at, updated_at FROM users WHERE name LIKE :srchKwd OR bio LIKE :srchKwd');
+    $srchKwd = "%".$keyword."%";
+    $rtrnStmt->bindValue(':srchKwd', $srchKwd, PDO::PARAM_STR);
+  }
+  try {
+    $rtrnStmt->execute();
+  } catch (Exception $e) {
+    sendResponse($e);
+  }
+  $rtrnFtchAllRslt = $rtrnStmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
