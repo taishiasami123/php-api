@@ -6,7 +6,7 @@
   }
 
   // dbに繋ぐ
-  require('dbconnect.php');
+  require('../dbconnect.php');
 
   // jsonを取得
   $json = file_get_contents("php://input");
